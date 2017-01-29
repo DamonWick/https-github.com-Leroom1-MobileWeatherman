@@ -4,9 +4,9 @@ namespace MobileWeatherman
 {
     public class Core
     {
-        public static async Task<WeatherToDisplay> GetWeatherForWarsaw()
+        public static async Task<WeatherToDisplay> GetCurrentWeatherForWarsaw()
         {
-            const string key = "38d3f118f3e15607e38b19dfdbec7562";
+            const string key = "YOUR KEY GOES HERE";
             const int warsawId = 6695624;
 
             string queryString =

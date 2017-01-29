@@ -14,7 +14,7 @@ namespace MobileWeatherman
         {
             base.OnAppearing();
 
-            WeatherToDisplay weather = await Core.GetWeatherForWarsaw();
+            WeatherToDisplay weather = await Core.GetCurrentWeatherForWarsaw();
             this.BindingContext = weather;
         }
     }
