@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mobileWeatherman="clr-namespace:MobileWeatherman;assembly=MobileWeatherman"
+             x:Class="MobileWeatherman.MainPage">
+
+    <ContentPage.BindingContext>
+        <mobileWeatherman:WeatherToDisplay />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Text="Search for date:" HorizontalTextAlignment="End" FontSize="15" />
+                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding CurrentDate}" FontSize="15" />
+                    
+                    <Label Grid.Column="0" Grid.Row="1" Text="Temperature" HorizontalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Temperature}" />
+
+                    <Label Grid.Column="0" Grid.Row="2" Text="Wind Speed" HorizontalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding Wind}" />
+
+                    <Label Grid.Column="0" Grid.Row="3" Text="Humidity" HorizontalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="3" Text="{Binding Humidity}" />
+
+                    <Label Grid.Column="0" Grid.Row="4" Text="Time of Sunrise" HorizontalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="4" Text="{Binding Sunrise}" />
+
+                    <Label Grid.Column="0" Grid.Row="5" Text="Time of Sunset" HorizontalTextAlignment="End" />
+                    <Label Grid.Column="1" Grid.Row="5" Text="{Binding Sunset}" />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>
