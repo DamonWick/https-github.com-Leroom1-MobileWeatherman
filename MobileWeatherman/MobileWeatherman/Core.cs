@@ -4,13 +4,12 @@ namespace MobileWeatherman
 {
     public class Core
     {
-        public static async Task<WeatherToDisplay> GetCurrentWeatherForWarsaw()
+        public static async Task<WeatherToDisplay> GetCurrentWeather(long stationId)
         {
             const string key = "YOUR KEY GOES HERE";
-            const int warsawId = 6695624;
 
             string queryString =
-                $"http://api.openweathermap.org/data/2.5/weather?id={warsawId}&appid={key}&units=metric&mode=json";
+                $"http://api.openweathermap.org/data/2.5/weather?id={stationId}&appid={key}&units=metric&mode=json";
 
             var response = await DataService.RequestDataFromService(queryString);
             var weatherDto = ResponseParser.Parse<WeatherDto>(response);

@@ -3,14 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mobileWeatherman="clr-namespace:MobileWeatherman;assembly=MobileWeatherman"
              x:Class="MobileWeatherman.MainPage">
-
     <ContentPage.BindingContext>
         <mobileWeatherman:WeatherToDisplay />
     </ContentPage.BindingContext>
-
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
+                <Label Text="Weather stations" />
+                <Picker SelectedIndexChanged="Picker_SelectedIndexChanged"
+                        x:Name="WeatherStationPicker" />
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -47,5 +49,4 @@
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-
 </ContentPage>
