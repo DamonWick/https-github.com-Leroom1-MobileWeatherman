@@ -6,6 +6,13 @@ namespace MobileWeatherman
     {
         public static async Task<WeatherToDisplay> GetCurrentWeather(long stationId)
         {
+            var weatherDto = await GetCurrentWeatherRaw(stationId);
+
+            return ConvertToWeatherForDisplay(weatherDto);
+        }
+
+        public static async Task<WeatherDto> GetCurrentWeatherRaw(long stationId)
+        {
             const string key = "YOUR KEY GOES HERE";
 
             string queryString =
@@ -13,8 +20,7 @@ namespace MobileWeatherman
 
             var response = await DataService.RequestDataFromService(queryString);
             var weatherDto = ResponseParser.Parse<WeatherDto>(response);
-
-            return ConvertToWeatherForDisplay(weatherDto);
+            return weatherDto;
         }
 
         private static WeatherToDisplay ConvertToWeatherForDisplay(WeatherDto results)

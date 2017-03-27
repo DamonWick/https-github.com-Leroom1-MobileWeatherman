@@ -2,15 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mobileWeatherman="clr-namespace:MobileWeatherman;assembly=MobileWeatherman"
-             x:Class="MobileWeatherman.MainPage">
-    <ContentPage.BindingContext>
-        <mobileWeatherman:WeatherToDisplay />
-    </ContentPage.BindingContext>
+             x:Class="MobileWeatherman.MainPage"
+             Title="Weather forecast">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <Label Text="Weather stations" />
-                <Picker SelectedIndexChanged="Picker_SelectedIndexChanged"
+                <Picker SelectedIndex="{Binding SelectedWeatherStationIndex}"
                         x:Name="WeatherStationPicker" />
 
                 <Grid>
@@ -32,13 +30,13 @@
                     <Label Grid.Column="1" Grid.Row="0" Text="{Binding CurrentDate}" FontSize="15" />
                     
                     <Label Grid.Column="0" Grid.Row="1" Text="Temperature" HorizontalTextAlignment="End" />
-                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Temperature}" />
+                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Temperature, StringFormat='{0} C'}" />
 
                     <Label Grid.Column="0" Grid.Row="2" Text="Wind Speed" HorizontalTextAlignment="End" />
-                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding Wind}" />
+                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding Wind, StringFormat='{0} mph'}" />
 
                     <Label Grid.Column="0" Grid.Row="3" Text="Humidity" HorizontalTextAlignment="End" />
-                    <Label Grid.Column="1" Grid.Row="3" Text="{Binding Humidity}" />
+                    <Label Grid.Column="1" Grid.Row="3" Text="{Binding Humidity, StringFormat='{0}%'}" />
 
                     <Label Grid.Column="0" Grid.Row="4" Text="Time of Sunrise" HorizontalTextAlignment="End" />
                     <Label Grid.Column="1" Grid.Row="4" Text="{Binding Sunrise}" />
