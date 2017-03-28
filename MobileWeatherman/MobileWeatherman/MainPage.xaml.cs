@@ -11,7 +11,7 @@ namespace MobileWeatherman
             InitializeComponent();
 
             ViewModel = new WeatherToDisplayViewModel();
-            foreach (var weatherStation in ViewModel.ListOfWeatherStations)
+            foreach (var weatherStation in WeatherToDisplayViewModel.ListOfWeatherStations)
             {
                 WeatherStationPicker.Items.Add(weatherStation.Name);
             }
@@ -19,4 +19,4 @@ namespace MobileWeatherman
             this.BindingContext = ViewModel;
         }
     }
-}
+}S

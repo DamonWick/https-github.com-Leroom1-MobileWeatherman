@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace MobileWeatherman
 {
@@ -19,7 +22,7 @@ namespace MobileWeatherman
 
         private double _wind;
 
-        public List<WeatherStation> ListOfWeatherStations = new List<WeatherStation>
+        public static List<WeatherStation> ListOfWeatherStations = new List<WeatherStation>
         {
             new WeatherStation {Id = 6695624, Name = "Warszawa"},
             new WeatherStation {Id = 3093133, Name = "Łódź"},
@@ -105,19 +108,23 @@ namespace MobileWeatherman
                 {
                     _selectedWeatherStationIndex = value;
                     OnPropertyChanged();
-                    GetWeatherForSelectedStation();
+                    GetWeatherCommand.Execute(value);
                 }
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public Command GetWeatherCommand;
 
-        private async void GetWeatherForSelectedStation()
+        public WeatherToDisplayViewModel()
         {
-            var selectedElement = ListOfWeatherStations[SelectedWeatherStationIndex];
+            GetWeatherCommand = new Command<int>(async (selectedItemIndex) => await GetWeather(selectedItemIndex));
+        }
 
-            var weather = await Core.GetCurrentWeatherRaw(selectedElement.Id);
-
+        private async Task GetWeather(int selectedItemIndex)
+        {
+            var selectedStation = ListOfWeatherStations[(int)selectedItemIndex];
+            var weather = await Core.GetCurrentWeatherRaw(selectedStation.Id);
+            
             Temperature = weather.main.temp;
             Wind = weather.wind.speed;
             Humidity = weather.main.humidity;
@@ -125,6 +132,8 @@ namespace MobileWeatherman
             Sunset = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(weather.sys.sunset).TimeOfDay + " UTC";
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
